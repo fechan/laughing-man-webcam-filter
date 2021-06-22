@@ -1,6 +1,8 @@
 """Overlay the Laughing Man logo from Ghost in the Shell: SAC on any faces in webcam input,
 then pipe the output to a virtual webcam. The logo is animated.
 
+By default, you must press "ESC" to stop the program.
+
 pyfakewebcam requires additional setup https://github.com/jremmons/pyfakewebcam
 """
 
@@ -9,12 +11,15 @@ import cv2 as cv
 import pyfakewebcam
 from PIL import Image
 
+# YOU SHOULD PROBABLY CONFIGURE THESE
 INPUT_WEBCAM_NO = 2 # 0 is /dev/video0, 1 is /dev/video1, etc.
 VIRTUAL_WEBCAM_PATH = "/dev/video4" # /dev/ path to pyfakewebcam virtual webcam (use v4l2-ctl --list-devices)
+FACE_CASCADE_MODEL_PATH = "haarcascade_frontalface_alt.xml"
+
+# YOU PROBABLY DON'T NEED TO TOUCH THESE
+EXIT_KEY_ASCII_CODE = 27 # used to set exit keybind. 27 is Escape
 VIRTUAL_WEBCAM_WIDTH = 640
 VIRTUAL_WEBCAM_HEIGHT = 480
-FACE_CASCADE_MODEL_PATH = "haarcascade_frontalface_alt.xml"
-EXIT_KEY_ASCII_CODE = 27 # used to set exit keybind. 27 is Escape
 
 def split_animated_gif(gif_file_path):
     """Split an animated GIF into OpenCV image frames in an array"""
